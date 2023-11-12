@@ -51,20 +51,20 @@ def close_tab(tabs, current_tab_index):  # Close the current tab
 
 
 def display_tab_content(tabs, current_tab_index):  # Display the content of the current tab
-    if not tabs:
+    if not tabs:  # If there are no tabs, display an error message
         print("No tabs to display.")
         return
 
     index = input("Enter the index of the tab to display its content (press Enter to display the last opened tab): ")
     if index.strip() == "":  # If the user enters an empty string, display the last opened tab
-        index = current_tab_index
+        index = current_tab_index  # index for the tab we want to display
     else:
-        index = int(index) - 1
+        index = int(index) - 1  # Subtract 1 from the user input to get the correct index
 
-    if 0 <= index < len(tabs):
-        url = tabs[index]['url']
+    if 0 <= index < len(tabs):  # Check if the index is valid (in the list)
+        url = tabs[index]['url']  # Display the content of the tab at the specified index
         try:  # Try to open the URL
-            response = requests.get(url)
+            response = requests.get(url)  # Display the content of the tab at the specified index
             response.raise_for_status()
             soup = BeautifulSoup(response.text, 'html.parser')
             print(f"Content of '{tabs[index]['title']}' ({url}):\n{soup.prettify()}")
@@ -74,7 +74,7 @@ def display_tab_content(tabs, current_tab_index):  # Display the content of the 
         print("Invalid tab index.")
 
 
-def display_all_tabs(tabs):
+def display_all_tabs(tabs):  # Display all tabs
     if not tabs:
         print("No tabs open.")
         return
@@ -83,22 +83,22 @@ def display_all_tabs(tabs):
     for tab in tabs:
         title = tab.get('title', 'Untitled Tab')  # Assuming the title is stored in the 'title' key
         print(tab_number, "tab:", title)
-        tab_number += 1
-        display_all_tabs(tab.get('nested_tabs', []))
+        tab_number += 1  # tab_number is moving up by 1 each time
+        display_all_tabs(tab.get('nested_tabs', []))  # dsiplaying all tabs and nested tabs
 
 
-def open_nested_tab(tabs, current_tab_index):
-    if not tabs:
+def open_nested_tab(tabs, current_tab_index):  # Open a new nested tab
+    if not tabs:  # If there are no tabs, display an error message
         print("No current tab to nest under.")
         return tabs, current_tab_index
 
     parent_index = int(input("Enter the index of the parent tab to create nested tabs under: "))
     parent_index -= 1  # Adjust to 0-based index
-    if 0 <= parent_index < len(tabs):
+    if 0 <= parent_index < len(tabs):  # Check if the parent index is valid (in the list)
         nested_title = input("Enter the title for the nested tab:")
         nested_url = input("Enter the URL for the nested tab: ")
-        nested_tab = create_tab(nested_title, nested_url)
-        tabs[parent_index]['nested_tabs'].append(nested_tab)
+        nested_tab = create_tab(nested_title, nested_url)  # create a nested tab
+        tabs[parent_index]['nested_tabs'].append(nested_tab)  # add the nested tab to the parent tab's nested tabs list
         print("Opened nested tab: ", nested_title, " under", tabs[parent_index][title])
 
     else:
@@ -107,45 +107,43 @@ def open_nested_tab(tabs, current_tab_index):
     return tabs, current_tab_index
 
 
-def clear_all_tabs():
+def clear_all_tabs():  # Clear all tabs
     tabs = []
     current_tab_index = None
     print("All tabs cleared.")
     return tabs, current_tab_index
 
 
-def save_tabs(tabs, file_path):
+def save_tabs(tabs, file_path):  # Save tabs to a file in json format
     try:
         with open(file_path, "w") as file:
-            tabs_data = tabs.copy()
-            # Creating a copy to avoid modifying the original list
-            json.dump(tabs_data, file, indent=2)
+            tabs_data = tabs.copy()  # Creating a copy to avoid modifying the original list
+            json.dump(tabs_data, file, indent=2)  # Saving the tabs data to the file
         print(f"Tabs saved successfully to '{file_path}'.")
-    except Exception as e:
+    except Exception as e:  # If there is an error saving the tabs, display an error message
         print(f"Error saving tabs: {e}")
 
 
-def import_tabs(file_path):
+def import_tabs(file_path):  # Import tabs from a file in json format
     try:
-        with open(file_path, "r") as file:
-            tabs_data = json.load(file)
-            tabs = tabs_data.copy()
-            # Creating a copy to avoid modifying the original list
-            current_tab_index = None
+        with open(file_path, "r") as file:  # Reading the tabs data from the file
+            tabs_data = json.load(file)  # Loading the tabs data from the file
+            tabs = tabs_data.copy()  # Creating a copy to avoid modifying the original list
+            current_tab_index = None  # Initializing the current tab index
         print(f"Tabs imported successfully from '{file_path}'.")
-    except FileNotFoundError:
+    except FileNotFoundError:  # If the file is not found, display an error message
         print("No saved tabs found.")
         tabs = []
         current_tab_index = None
-    except Exception as e:
+    except Exception as e:  # If there is an error importing the tabs, display an error message
         print(f"Error importing tabs: {e}")
         tabs = []
         current_tab_index = None
 
-    return tabs, current_tab_index
+    return tabs, current_tab_index  # Return the tabs and current tab index
 
 
-def update_current_tab_index(tabs, current_tab_index):
+def update_current_tab_index(tabs, current_tab_index):  # Update the current tab index
     if tabs:
         current_tab_index = min(current_tab_index, len(tabs) - 1)
     else:
