@@ -203,3 +203,5 @@ if __name__ == "__main__":
 # close_tabe(): https://stackoverflow.com/questions/36249367/stripping-a-string-and-getting-start-index-and-end-index
 #https://www.w3schools.com/python/python_json.asp
 #https://www.w3schools.com/python/module_requests.asp
+#https://medium.com/@kimdang229/python-and-beautifulsoup-web-scraping-tutorial-1d47e7a38fab
+#https://pythonprogramming.net/introduction-scraping-parsing-beautiful-soup-tutorial/
