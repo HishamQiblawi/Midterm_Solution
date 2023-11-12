@@ -207,3 +207,5 @@ if __name__ == "__main__":
 #https://pythonprogramming.net/introduction-scraping-parsing-beautiful-soup-tutorial/
 #https://www.analyticsvidhya.com/blog/2021/04/beautifulsoup-exception-handling/
 #https://youtu.be/63nw00JqHo0?si=Gf4x7f-EIlqe95oT
+#https://youtu.be/rUg4Qu-FqY8?si=zvl9PaWMKzA6aEvo
+#https://youtube.com/watch?v=givwa2a-c5U&si=GdzqQvB8wrJkCwoZ
