@@ -1,6 +1,6 @@
-import json  # Import json module
-import requests  # Import requests module
-from bs4 import BeautifulSoup  # Import BeautifulSoup module
+import json  # Import json module for parsing JSON files
+import requests  # Import requests module for making HTTP requests
+from bs4 import BeautifulSoup  # Import BeautifulSoup module for parsing HTML files
 
 
 def print_menu():  # Print the menu options
@@ -17,11 +17,11 @@ def print_menu():  # Print the menu options
 
 
 def create_tab(title, url):  # Create a new tab
-    return {"title": title, "url": url, "nested_tabs": []}
+    return {"title": title, "url": url, "nested_tabs": []}  # Return a new tab object
 
 
 def open_tab(tabs, current_tab_index, title, url):  # Open a new tab
-    tab = create_tab(title, url)
+    tab = create_tab(title, url)  # Create a new tab
     tabs.append(tab)
     current_tab_index = len(tabs) - 1
     print("Opened tab:", title, "with URL:", url)
@@ -31,23 +31,23 @@ def open_tab(tabs, current_tab_index, title, url):  # Open a new tab
 def close_tab(tabs, current_tab_index):  # Close the current tab
     if not tabs:
         print("No tabs to close.")
-        return tabs, current_tab_index
+        return tabs, current_tab_index  # Close the current tab
 
     index = int(input("Enter the index of the tab to close"))
 
     if index.strip() == "":  # If the user enters an empty string, close the current tab
-        index = current_tab_index
+        index = current_tab_index  # index for the tab we want to close
     else:
         index = int(index) - 1  # Subtract 1 from the user input to get the correct index
 
-    if 0 <= index < len(tabs):
-        closed_tab = tabs.pop(index)
-        current_tab_index = min(current_tab_index, len(tabs) - 1)
+    if 0 <= index < len(tabs):  # Check if the index is valid (in the list)
+        closed_tab = tabs.pop(index)  # Pop the tab at the specified index from the list
+        current_tab_index = min(current_tab_index, len(tabs) - 1)  # Update the current tab index
         print("Tab has been closed successfully")
     else:
         print("Invalid tab index.")
 
-    return tabs, current_tab_index
+    return tabs, current_tab_index  # Return the updated list and current tab index
 
 
 def display_tab_content(tabs, current_tab_index):  # Display the content of the current tab
