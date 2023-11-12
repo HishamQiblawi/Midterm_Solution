@@ -1,55 +1,69 @@
-def main():
-    tabs = [
-        {
-            "title": "youtube",
-            "url": "https://www.youtube.com"
-        },
-        {
-            "title": "google",
-            "url": "https://www.google.com"
-        },
+def print_menu():  # Print the menu options
+    print("Welcome to Browser Tabs!")
+    print("1. Open Tab")
+    print("2. Close Tab")
+    print("3. Switch Tab")
+    print("4. Display All Tabs")
+    print("5. Open Nested Tab")
+    print("6. Clear All Tabs")
+    print("7. Save Tabs")
+    print("8. Import Tabs")
+    print("9. Exit")
 
-        {"title": "facebook",
-         "url": "https://www.facebook.com"
-         }
-    ]
 
-    def menu():
-        while True:
-            print("Hello")
-            print("1.open tab")
-            print("2.close tab")
-            print("3.switch Tab")
-            print("4.display All Tabs")
-            print("5.open Nested Tab")
-            print("6.clear All Tabs")
-            print("7.save Tabs")
-            print("8.import Tabs")
-            print("9.exit")
-            choice = int(input("Enter a number:"))
+def create_tab(title, url):
+    return {"title": title, "url": url, "nested_tabs": []}
 
-            if choice == "1":
-                title = input("Enter a title: ")
-                url = input("Enter url: ")
-                open_tab(title, url)
 
-            if choice == 2:
-                close = int(input("Enter a number"))
-                close_tab()
+def open_tab(tabs, current_tab_index, title, url):
+    tab = create_tab(title, url)
+    tabs.append(tab)
+    current_tab_index = len(tabs) - 1
+    print("Opened tab:", title, "with URL:", url)
+    return tabs, current_tab_index
 
-    def open_tab(title, url):
-        tabs.append({"title": title, "url": url})
 
-    def close_tab():
-        for close in range(0, (len(tabs) - 1)):
-            if close == (len(tabs) - 1):
-                tabs.pop()
-            tabs[close]
+def close_tab(tabs, current_tab_index):
+    if not tabs:
+        print("No tabs to close.")
+        return tabs, current_tab_index
 
-    print(menu())
+    index = input("Enter the index of the tab to close")
+
+    if index.strip() == "":
+        index = current_tab_index
+    else:
+        index = int(index) - 1
+
+    if 0 <= index < len(tabs):
+        closed_tab = tabs.pop(index)
+        current_tab_index = min(current_tab_index, len(tabs) - 1)
+        print("Closed tab:", closed_tab["title"])
+    else:
+        print("Invalid tab index.")
+
+    return tabs, current_tab_index
 
 
 if __name__ == "__main__":
-    main()
+    tabs = []  # List to store open tabs
+    current_tab_index = None  # Index of the currently selected tab
+
+    # Display the menu options and prompt the user for a choice
+    while True:
+        print_menu()
+        choice = input("Enter your choice (1-9): ")
+
+        if choice == "1":
+            # Prompt the user for a title and open a new tab with the provided title
+            title = input("Enter the title for the new tab: ")
+            url = input("Enter the URL for the new tab: ")
+            tabs, current_tab_index = open_tab(tabs, current_tab_index, title, url)
+            print("tab has been added")
+
+
+        # Prompt the user for the index of the tab to close
+        elif choice == "2":
+            tabs, current_tab_index = close_tab(tabs, current_tab_index)
 
 
