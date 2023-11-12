@@ -28,13 +28,23 @@ def main():
             print("9.exit")
             choice = int(input("Enter a number:"))
 
-            if choice == 1:
+            if choice == "1":
                 title = input("Enter a title: ")
                 url = input("Enter url: ")
                 open_tab(title, url)
 
+            if choice == 2:
+                close = int(input("Enter a number"))
+                close_tab()
+
     def open_tab(title, url):
         tabs.append({"title": title, "url": url})
+
+    def close_tab():
+        for close in range(0, (len(tabs) - 1)):
+            if close == (len(tabs) - 1):
+                tabs.pop()
+            tabs[close]
 
     print(menu())
 
