@@ -201,3 +201,5 @@ if __name__ == "__main__":
 
 # REF:
 # close_tabe(): https://stackoverflow.com/questions/36249367/stripping-a-string-and-getting-start-index-and-end-index
+#https://www.w3schools.com/python/python_json.asp
+#https://www.w3schools.com/python/module_requests.asp
