@@ -209,3 +209,8 @@ if __name__ == "__main__":
 #https://youtu.be/63nw00JqHo0?si=Gf4x7f-EIlqe95oT
 #https://youtu.be/rUg4Qu-FqY8?si=zvl9PaWMKzA6aEvo
 #https://youtube.com/watch?v=givwa2a-c5U&si=GdzqQvB8wrJkCwoZ
+#https://sparkbyexamples.com/python/update-list-element-in-python/#:~:text=Update%20Existing%20Elements%20in%20the,35%20to%20mylist%5B2%5D%20.
+#https://stackoverflow.com/questions/58253867/how-to-get-response-url-in-python-requests-module
+#https://www.youtube.com/watch?v=tb8gHvYlCFs
+#https://www.programiz.com/python-programming/nested-dictionary
+#https://stackoverflow.com/questions/18982610/difference-between-except-and-except-exception-as-e
