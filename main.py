@@ -85,6 +85,7 @@ def display_all_tabs(tabs):
 def open_nested_tab(tabs, current_tab_index):
     if not tabs:
         print("No current tab to nest under.")
+        return tabs, current_tab_index
 
 
 
