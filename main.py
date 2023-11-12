@@ -89,6 +89,9 @@ def open_nested_tab(tabs, current_tab_index):
         parent_index = int(input("Enter the index of the parent tab to create nested tabs under: "))
         parent_index -= 1  # Adjust to 0-based index
 
+        if 0 <= parent_index < len(tabs):
+            nested_title = input("Enter the title for the nested tab:
+
 
 if __name__ == "__main__":
     tabs = []  # List to store open tabs
