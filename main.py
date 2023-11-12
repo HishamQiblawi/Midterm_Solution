@@ -179,22 +179,22 @@ if __name__ == "__main__":
         # Prompt the user to print the titles of all open tabs.
         elif choice == "4":
             display_all_tabs(tabs)
-        elif choice == '5':
+        elif choice == '5':  # Prompt the user for a title and open a new nested tab with the provided title
             tabs, current_tab_index = open_nested_tab(tabs, current_tab_index)
-        elif choice == '6':
+        elif choice == '6':  # clear all tabs
             tabs, current_tab_index = clear_all_tabs()
-        elif choice == '7':
+        elif choice == '7':  # Save tabs to a file in json format
             file_path = input("Enter the file path to save tabs (e.g., 'tabs.json'): ")
             save_tabs(tabs, file_path)
 
-        elif choice == '8':
+        elif choice == '8':  # Import tabs from a file in json format
             file_path = input("Enter the file path to import tabs from: ")
             tabs, current_tab_index = import_tabs(file_path)
 
-        elif choice == '9':
+        elif choice == '9':  # Exit the program
             print("Exiting Browser Tabs. Goodbye!")
             break
         else:
             print("Invalid choice. Please enter a number between 1 and 9.")
 
-        current_tab_index = update_current_tab_index(tabs, current_tab_index)
+        current_tab_index = update_current_tab_index(tabs, current_tab_index)  # Update the current tab index
