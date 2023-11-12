@@ -74,12 +74,15 @@ def display_tab_content(tabs, current_tab_index):
 
 
 def display_all_tabs(tabs):
-  if not tabs:
-      print("No tabs open.")
-      return
-  for i, tab in enumerate(tabs, start=1):
-    print(i,"tab",[title])
-    display_all_tabs(tab['nested_tabs'])
+    if not tabs:
+        print("No tabs open.")
+        return
+    for i, tab in enumerate(tabs, start=1):
+        print(i, "tab", [title])
+        display_all_tabs(tab['nested_tabs'])
+
+
+def open_nested_tab(tabs, current_tab_index):
 
 
 if __name__ == "__main__":
@@ -103,10 +106,10 @@ if __name__ == "__main__":
         elif choice == "2":
             tabs, current_tab_index = close_tab(tabs, current_tab_index)
         # Prompt the user for the index of the tab to display its content
-        elif choice == '3':
+        elif choice == "3":
             display_tab_content(tabs, current_tab_index)
 
         # Prompt the user to print the titles of all open tabs.
-        elif choice == '4':
+        elif choice == "4":
             display_all_tabs(tabs)
 
