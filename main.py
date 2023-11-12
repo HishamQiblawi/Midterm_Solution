@@ -94,16 +94,19 @@ def open_nested_tab(tabs, current_tab_index):
         nested_url = input("Enter the URL for the nested tab: ")
         tabs[parent_index]['nested_tabs'].append(nested_tab)
         print("Opened nested tab: ", nested_title, " under", tabs[parent_index][title])
+
     else:
         print("Invalid parent tab index.")
 
     return tabs, current_tab_index
+
 
 def clear_all_tabs():
     tabs = []
     current_tab_index = None
     print("All tabs cleared.")
     return tabs, current_tab_index
+
 
 def save_tabs(tabs, file_path):
     try:
@@ -112,15 +115,37 @@ def save_tabs(tabs, file_path):
             # Creating a copy to avoid modifying the original list
             json.dump(tabs_data, file, indent=2)
         print(f"Tabs saved successfully to '{file_path}'.")
-
     except Exception as e:
         print(f"Error saving tabs: {e}")
 
 
+def import_tabs(file_path):
+    try:
+        with open(file_path, "r") as file:
+            tabs_data = json.load(file)
+            tabs = tabs_data.copy()
+            # Creating a copy to avoid modifying the original list
+            current_tab_index = None
+        print(f"Tabs imported successfully from '{file_path}'.")
+    except FileNotFoundError:
+        print("No saved tabs found.")
+        tabs = []
+        current_tab_index = None
+    except Exception as e:
+        print(f"Error importing tabs: {e}")
+        tabs = []
+        current_tab_index = None
+
+    return tabs, current_tab_index
 
 
+def update_current_tab_index(tabs, current_tab_index):
+    if tabs:
+        current_tab_index = min(current_tab_index, len(tabs) - 1)
+    else:
+        current_tab_index = None
 
-
+    return current_tab_index
 
 
 if __name__ == "__main__":
@@ -150,13 +175,20 @@ if __name__ == "__main__":
         # Prompt the user to print the titles of all open tabs.
         elif choice == "4":
             display_all_tabs(tabs)
-
         elif choice == '5':
             tabs, current_tab_index = open_nested_tab(tabs, current_tab_index)
-
         elif choice == '6':
             tabs, current_tab_index = clear_all_tabs()
-
         elif choice == '7':
             file_path = input("Enter the file path to save tabs (e.g., 'tabs.json'): ")
             save_tabs(tabs, file_path)
+
+        elif choice == '8':
+            file_path = input("Enter the file path to import tabs from: ")
+            tabs, current_tab_index = import_tabs(file_path)
+
+        elif choice == '9':
+            print("Exiting Browser Tabs. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 9.")
