@@ -102,7 +102,7 @@ def clear_all_tabs():
     tabs = []
     current_tab_index = None
     print("All tabs cleared.")
-
+    return tabs, current_tab_index
 
 
 
