@@ -91,7 +91,7 @@ def open_nested_tab(tabs, current_tab_index):
     if 0 <= parent_index < len(tabs):
         nested_title = input("Enter the title for the nested tab:")
         nested_url = input("Enter the URL for the nested tab: ")
-
+        tabs[parent_index]['nested_tabs'].append(nested_tab)
 
 if __name__ == "__main__":
     tabs = []  # List to store open tabs
