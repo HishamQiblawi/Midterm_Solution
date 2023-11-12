@@ -86,7 +86,8 @@ def open_nested_tab(tabs, current_tab_index):
     if not tabs:
         print("No current tab to nest under.")
         return tabs, current_tab_index
-    parent_index = int(input("Enter the index of the parent tab to create nested tabs under: "))
+        parent_index = int(input("Enter the index of the parent tab to create nested tabs under: "))
+        parent_index -= 1  # Adjust to 0-based index
 
 
 if __name__ == "__main__":
