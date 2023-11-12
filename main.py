@@ -73,6 +73,12 @@ def display_tab_content(tabs, current_tab_index):
         print("Invalid tab index.")
 
 
+def display_all_tabs(tabs):
+    if not tabs:
+        print("No tabs open.")
+        return
+
+
 if __name__ == "__main__":
     tabs = []  # List to store open tabs
     current_tab_index = None  # Index of the currently selected tab
@@ -96,4 +102,8 @@ if __name__ == "__main__":
         # Prompt the user for the index of the tab to display its content
         elif choice == '3':
             display_tab_content(tabs, current_tab_index)
+
+        # Prompt the user to print the titles of all open tabs.
+        elif choice == '4':
+            display_all_tabs(tabs)
 
