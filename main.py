@@ -83,6 +83,7 @@ def display_all_tabs(tabs):
 
 
 def open_nested_tab(tabs, current_tab_index):
+    if not tabs:
 
 
 if __name__ == "__main__":
@@ -112,4 +113,5 @@ if __name__ == "__main__":
         # Prompt the user to print the titles of all open tabs.
         elif choice == "4":
             display_all_tabs(tabs)
+
 
