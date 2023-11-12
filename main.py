@@ -104,7 +104,10 @@ def clear_all_tabs():
     print("All tabs cleared.")
     return tabs, current_tab_index
 
-
+def save_tabs(tabs, file_path):
+    try:
+        with open(file_path, "w") as file:
+            tabs_data = tabs.copy()
 
 if __name__ == "__main__":
     tabs = []  # List to store open tabs
