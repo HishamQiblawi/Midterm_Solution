@@ -101,6 +101,10 @@ def open_nested_tab(tabs, current_tab_index):
 def clear_all_tabs():
     tabs = []
     current_tab_index = None
+    print("All tabs cleared.")
+
+
+
 
 if __name__ == "__main__":
     tabs = []  # List to store open tabs
