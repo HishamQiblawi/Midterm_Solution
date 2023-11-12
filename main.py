@@ -205,3 +205,5 @@ if __name__ == "__main__":
 #https://www.w3schools.com/python/module_requests.asp
 #https://medium.com/@kimdang229/python-and-beautifulsoup-web-scraping-tutorial-1d47e7a38fab
 #https://pythonprogramming.net/introduction-scraping-parsing-beautiful-soup-tutorial/
+#https://www.analyticsvidhya.com/blog/2021/04/beautifulsoup-exception-handling/
+#https://youtu.be/63nw00JqHo0?si=Gf4x7f-EIlqe95oT
