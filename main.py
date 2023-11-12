@@ -136,3 +136,6 @@ if __name__ == "__main__":
 
         elif choice == '5':
             tabs, current_tab_index = open_nested_tab(tabs, current_tab_index)
+
+        elif choice == '6':
+            tabs, current_tab_index = clear_all_tabs()
