@@ -74,9 +74,12 @@ def display_tab_content(tabs, current_tab_index):
 
 
 def display_all_tabs(tabs):
-    if not tabs:
-        print("No tabs open.")
-        return
+  if not tabs:
+      print("No tabs open.")
+      return
+  for i, tab in enumerate(tabs, start=1):
+    print(i,"tab",[title])
+    display_all_tabs(tab['nested_tabs'])
 
 
 if __name__ == "__main__":
