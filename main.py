@@ -1,3 +1,4 @@
+import json
 import requests
 from bs4 import BeautifulSoup
 
@@ -108,6 +109,19 @@ def save_tabs(tabs, file_path):
     try:
         with open(file_path, "w") as file:
             tabs_data = tabs.copy()
+            # Creating a copy to avoid modifying the original list
+            json.dump(tabs_data, file, indent=2)
+        print(f"Tabs saved successfully to '{file_path}'.")
+
+    except Exception as e:
+        print(f"Error saving tabs: {e}")
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     tabs = []  # List to store open tabs
@@ -142,3 +156,7 @@ if __name__ == "__main__":
 
         elif choice == '6':
             tabs, current_tab_index = clear_all_tabs()
+
+        elif choice == '7':
+            file_path = input("Enter the file path to save tabs (e.g., 'tabs.json'): ")
+            save_tabs(tabs, file_path)
