@@ -1,6 +1,6 @@
-import json
-import requests
-from bs4 import BeautifulSoup
+import json  # Import json module
+import requests  # Import requests module
+from bs4 import BeautifulSoup  # Import BeautifulSoup module
 
 
 def print_menu():  # Print the menu options
@@ -16,11 +16,11 @@ def print_menu():  # Print the menu options
     print("9. Exit")
 
 
-def create_tab(title, url):
+def create_tab(title, url):  # Create a new tab
     return {"title": title, "url": url, "nested_tabs": []}
 
 
-def open_tab(tabs, current_tab_index, title, url):
+def open_tab(tabs, current_tab_index, title, url):  # Open a new tab
     tab = create_tab(title, url)
     tabs.append(tab)
     current_tab_index = len(tabs) - 1
@@ -28,42 +28,42 @@ def open_tab(tabs, current_tab_index, title, url):
     return tabs, current_tab_index
 
 
-def close_tab(tabs, current_tab_index):
+def close_tab(tabs, current_tab_index):  # Close the current tab
     if not tabs:
         print("No tabs to close.")
         return tabs, current_tab_index
 
-    index = input("Enter the index of the tab to close")
+    index = int(input("Enter the index of the tab to close"))
 
-    if index.strip() == "":
+    if index.strip() == "":  # If the user enters an empty string, close the current tab
         index = current_tab_index
     else:
-        index = int(index) - 1
+        index = int(index) - 1  # Subtract 1 from the user input to get the correct index
 
     if 0 <= index < len(tabs):
         closed_tab = tabs.pop(index)
         current_tab_index = min(current_tab_index, len(tabs) - 1)
-        print("Closed tab:", closed_tab["title"])
+        print("Tab has been closed successfully")
     else:
         print("Invalid tab index.")
 
     return tabs, current_tab_index
 
 
-def display_tab_content(tabs, current_tab_index):
+def display_tab_content(tabs, current_tab_index):  # Display the content of the current tab
     if not tabs:
         print("No tabs to display.")
         return
 
     index = input("Enter the index of the tab to display its content (press Enter to display the last opened tab): ")
-    if index.strip() == "":
+    if index.strip() == "":  # If the user enters an empty string, display the last opened tab
         index = current_tab_index
     else:
         index = int(index) - 1
 
     if 0 <= index < len(tabs):
         url = tabs[index]['url']
-        try:
+        try:  # Try to open the URL
             response = requests.get(url)
             response.raise_for_status()
             soup = BeautifulSoup(response.text, 'html.parser')
@@ -78,20 +78,26 @@ def display_all_tabs(tabs):
     if not tabs:
         print("No tabs open.")
         return
-    for i, tab in enumerate(tabs, start=1):
-        print(i, "tab", [title])
-        display_all_tabs(tab['nested_tabs'])
+
+    tab_number = 1
+    for tab in tabs:
+        title = tab.get('title', 'Untitled Tab')  # Assuming the title is stored in the 'title' key
+        print(tab_number, "tab:", title)
+        tab_number += 1
+        display_all_tabs(tab.get('nested_tabs', []))
 
 
 def open_nested_tab(tabs, current_tab_index):
     if not tabs:
         print("No current tab to nest under.")
         return tabs, current_tab_index
+
     parent_index = int(input("Enter the index of the parent tab to create nested tabs under: "))
     parent_index -= 1  # Adjust to 0-based index
     if 0 <= parent_index < len(tabs):
         nested_title = input("Enter the title for the nested tab:")
         nested_url = input("Enter the URL for the nested tab: ")
+        nested_tab = create_tab(nested_title, nested_url)
         tabs[parent_index]['nested_tabs'].append(nested_tab)
         print("Opened nested tab: ", nested_title, " under", tabs[parent_index][title])
 
@@ -162,7 +168,7 @@ if __name__ == "__main__":
             title = input("Enter the title for the new tab: ")
             url = input("Enter the URL for the new tab: ")
             tabs, current_tab_index = open_tab(tabs, current_tab_index, title, url)
-            print("tab has been added")
+            print("tab has been openned succesfully")
 
 
         # Prompt the user for the index of the tab to close
@@ -192,3 +198,5 @@ if __name__ == "__main__":
             break
         else:
             print("Invalid choice. Please enter a number between 1 and 9.")
+
+        current_tab_index = update_current_tab_index(tabs, current_tab_index)
