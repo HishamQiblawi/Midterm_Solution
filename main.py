@@ -31,7 +31,7 @@ def open_tab(tabs, current_tab_index, title, url):  # Open a new tab
 def close_tab(tabs, current_tab_index):  # Close the current tab
     if not tabs:
         print("No tabs to close.")
-        return tabs, current_tab_index  # Close the current tab
+        return tabs, current_tab_index  # Close and update current tabs indices(none)
 
     index = int(input("Enter the index of the tab to close"))
 
@@ -198,3 +198,6 @@ if __name__ == "__main__":
             print("Invalid choice. Please enter a number between 1 and 9.")
 
         current_tab_index = update_current_tab_index(tabs, current_tab_index)  # Update the current tab index
+
+# REF:
+# close_tabe(): https://stackoverflow.com/questions/36249367/stripping-a-string-and-getting-start-index-and-end-index
