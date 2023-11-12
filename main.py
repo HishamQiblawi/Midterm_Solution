@@ -1,3 +1,7 @@
+import requests
+from bs4 import BeautifulSoup
+
+
 def print_menu():  # Print the menu options
     print("Welcome to Browser Tabs!")
     print("1. Open Tab")
@@ -45,6 +49,30 @@ def close_tab(tabs, current_tab_index):
     return tabs, current_tab_index
 
 
+def display_tab_content(tabs, current_tab_index):
+    if not tabs:
+        print("No tabs to display.")
+        return
+
+    index = input("Enter the index of the tab to display its content (press Enter to display the last opened tab): ")
+    if index.strip() == "":
+        index = current_tab_index
+    else:
+        index = int(index) - 1
+
+    if 0 <= index < len(tabs):
+        url = tabs[index]['url']
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, 'html.parser')
+            print(f"Content of '{tabs[index]['title']}' ({url}):\n{soup.prettify()}")
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching content: {e}")
+    else:
+        print("Invalid tab index.")
+
+
 if __name__ == "__main__":
     tabs = []  # List to store open tabs
     current_tab_index = None  # Index of the currently selected tab
@@ -65,5 +93,7 @@ if __name__ == "__main__":
         # Prompt the user for the index of the tab to close
         elif choice == "2":
             tabs, current_tab_index = close_tab(tabs, current_tab_index)
-
+        # Prompt the user for the index of the tab to display its content
+        elif choice == '3':
+            display_tab_content(tabs, current_tab_index)
 
